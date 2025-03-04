@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project leverages NYC taxi trip data to understand how payment methods impact fare amounts and ultimately driver revenue. By conducting an in-depth exploratory data analysis (EDA), hypothesis testing, and regression modeling, the study extracts actionable insights that can help taxi companies optimize their operations.
+This project leverages NYC taxi trip data to understand how payment methods impact fare amounts and, ultimately, driver revenue. By conducting an in-depth exploratory data analysis (EDA), hypothesis testing, and regression modeling, the study extracts actionable insights that can help taxi companies optimize their operations.
 
 ## Problem Statement
 
@@ -10,88 +10,78 @@ In the fast-paced taxi booking sector, maximizing revenue is essential for drive
 
 ## Objectives
 
-Analyze the relationship between payment type and fare amount.
-
-Test if there is a statistically significant difference in fares between card and cash transactions.
-
-Model fare amounts based on trip duration and payment type to quantify their impact.
-
-Recommend strategies for promoting payment methods that generate higher revenue.
-
+- **Analyze** the relationship between payment type and fare amount.
+- **Test** if there is a statistically significant difference in fares between card and cash transactions.
+- **Model** fare amounts based on trip duration and payment type to quantify their impact.
+- **Recommend** strategies for promoting payment methods that generate higher revenue.
 
 ## Data & Methodology
 
-Dataset Source: NYC TLC Trip Record Data (Yellow Taxi)
+- **Dataset Source:** NYC TLC Trip Record Data (Yellow Taxi)
+- **Key Variables:**
+  - **Passenger Count**
+  - **Trip Distance**
+  - **Payment Type** (filtered to include only cash and card)
+  - **Fare Amount**
+  - **Duration** (computed from pickup and dropoff times)
 
-## Key Variables:
+## Data Cleaning
 
-### Passenger Count
+- Handled missing values and removed duplicates.
+- Filtered records to include only rides with passenger counts between 1 and 5 and payment types of cash or card.
+- Removed extreme outliers using the IQR method.
 
-### Trip Distance
+## Exploratory Data Analysis (EDA)
 
-### Payment Type (filtered to include only cash and card)
+- **Univariate Analysis:**  
+  Visualized the distribution of each key variable using count plots, histograms, and boxplots.
+  
+- **Bivariate Analysis:**  
+  Compared fare amounts and trip distances by payment type using stacked bar charts and other visualizations to identify trends and patterns.
 
-### Fare Amount
+## Hypothesis Testing
 
-### Duration (computed from pickup and dropoff times)
+- **Test Conducted:** Mann–Whitney U test  
+- **Purpose:** To compare fare amounts between card and cash rides due to the skewed (non-normal) distribution.
+- **Finding:** The test indicated a statistically significant difference between the two groups.
 
+## Regression Analysis
 
-## Data Cleaning:
+- **Model:** Ordinary Least Squares (OLS) Regression  
+- **Predictors:** Duration and Payment Type (with Payment Type as a categorical variable)  
+- **Key Findings:**
+  - **Trip Duration Impact:** Each additional minute increases fare by approximately **\$0.86**.
+  - **Payment Type Impact:** Controlling for duration, cash rides are about **\$0.25 cheaper** than card rides.
+  - **Model Fit:** The model explains **78.3%** of the variance in fare amounts (R-squared = 0.783).
 
-Handled missing values and removed duplicates.
+## Limitations & Future Work
 
-Filtered records (passenger count between 1 and 5; payment type as cash/card).
+- **Residual Non-Normality:**  
+  The Q-Q plot shows that the residuals are not normally distributed. Future analyses might benefit from a **log-transformation** of fare amounts or **robust regression** techniques.
 
-Outlier removal was performed using the IQR method.
-
-
-## Exploratory Data Analysis (EDA):
-
-Univariate and bivariate visualizations (countplots, histograms, boxplots, and 100% stacked bar charts) were used to understand data distributions and relationships.
-
-
-## Hypothesis Testing:
-
-A Mann–Whitney U test was conducted to compare fare amounts between card and cash rides, given the non-normal (skewed) distribution.
-
-
-## Regression Analysis:
-
-An OLS regression model was fitted with fare_amount as the dependent variable and Duration and Payment Type as predictors.
-
-The model indicates that each additional minute increases fare by roughly $0.98, and controlling for duration, cash rides are approximately $0.28 cheaper than card rides.
-
-
-## Limitations & Future Work:
-
-Residuals are non-normally distributed. A log-transformation or robust regression may improve model fit.
-
-Incorporating additional predictors (e.g., trip_distance, time-of-day) could refine the analysis.
-
-
+- **Additional Predictors:**  
+  Incorporating further predictors—such as **trip_distance**, **time-of-day**, or **passenger_count**—could refine the model and offer deeper insights.
 
 ## Key Findings
 
-### Payment Type Impact:
+- **Payment Type Impact:**  
+  Card payments dominate the dataset and are associated with higher fare amounts compared to cash, even after controlling for trip duration.
 
-Card payments dominate the dataset and are associated with higher fare amounts compared to cash, even after controlling for trip duration.
-
-
-### Actionable Insight:
-
-Promoting cashless transactions (e.g., via loyalty programs and digital promotions) could potentially boost overall revenue for taxi drivers.
-
-
+- **Actionable Insight:**  
+  Promoting cashless transactions (e.g., via loyalty programs and digital promotions) could potentially boost overall revenue for taxi drivers.
 
 ## Recommendation
 
-Promote Card Payments: Incentivize digital transactions to capture higher revenue per ride.
+- **Promote Card Payments:**  
+  Incentivize digital transactions through loyalty programs, targeted promotions, or small discounts on digital payments to capture higher revenue per ride.
 
-Enhance Digital Infrastructure: Improve the payment system to support seamless cashless transactions.
+- **Enhance Digital Infrastructure:**  
+  Improve digital transaction systems to support cashless payments, thereby increasing operational efficiency and customer satisfaction.
 
-Further Analysis: Incorporate additional variables and consider alternative modeling techniques (e.g., log-transformation) for a more robust understanding.
+- **Further Analyze Ride Characteristics:**  
+  Investigate additional factors like trip distance, time-of-day, and passenger count to better understand the dynamics behind fare differences and optimize pricing strategies.
 
+## Conclusion
 
-Conclusion
+Our analysis confirms that card transactions yield higher fares on average, even when controlling for trip duration. This insight provides a strong basis for taxi companies to consider promoting cashless payments as a means to maximize revenue. The combination of hypothesis testing and regression analysis supports a targeted strategy, while also highlighting the need for further exploration with additional predictors.
 
-Our analysis confirms that card transactions yield higher fares on average. This insight provides a strong basis for taxi companies to consider promoting cashless payments to maximize revenue.
